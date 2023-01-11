@@ -24,7 +24,9 @@ public class DriveTrain extends SubsystemBase {
   private final SlewRateLimiter limiter = new SlewRateLimiter(0.5);
   
   /** Creates a new DriveTrain. */
-  public DriveTrain() {}
+  public DriveTrain() {
+    rightMotor.setInverted(true);
+  }
   
   /** Allows the robot to actually drive 
    * @param speed How fast the robot should move forward
