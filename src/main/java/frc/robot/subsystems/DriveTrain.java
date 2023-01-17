@@ -21,11 +21,11 @@ public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftMotor, rightMotor);
   
   //allows us to have a consistent acceleration instead of jumping straight to speed.
-  private final SlewRateLimiter limiter = new SlewRateLimiter(0.5);
+  private final SlewRateLimiter limiter = new SlewRateLimiter(1.2, 0.2);
   
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    rightMotor.setInverted(true);
+    leftMotor.setInverted(true);
   }
   
   /** Allows the robot to actually drive 
@@ -41,3 +41,5 @@ public class DriveTrain extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 }
+
+
