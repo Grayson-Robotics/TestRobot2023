@@ -21,4 +21,9 @@ public final class Constants {
     public static final int m_leftMotor = 0;
     public static final int m_rightMotor = 1;
   }
+
+  public final class pneumaticSolenoids{
+    public static final int solenoid1_F = 0;
+    public static final int solenoid1_R = 1;
+  }
 }
