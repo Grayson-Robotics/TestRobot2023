@@ -40,7 +40,10 @@ public class DriveTrain extends SubsystemBase {
     leftmotors.setInverted(true);
     
     gyro.reset();
-    Shuffleboard.getTab("Gyro").add(gyro);
+    
+    Shuffleboard.getTab("SmartDashboard").add(gyro);
+    Shuffleboard.getTab("SmartDashboard").add(drive);
+    
   }
   
   /** Allows the robot to actually drive 
@@ -55,6 +58,9 @@ public class DriveTrain extends SubsystemBase {
     gyro.getAngle();  
   }
 
+  public void calibrateGyro(){
+    gyro.calibrate();
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
