@@ -5,9 +5,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -22,7 +23,6 @@ public class DriveTrain extends SubsystemBase {
   
   private final WPI_VictorSPX topRightMotor = new WPI_VictorSPX(Constants.driveMotors.m_topRightMotor);
   private final WPI_VictorSPX bottomRightMotor = new WPI_VictorSPX(Constants.driveMotors.m_bottomRightMotor);
-
   private final MotorControllerGroup leftmotors = new MotorControllerGroup(topLeftMotor, bottomLeftMotor);
   private final MotorControllerGroup rightmotors = new MotorControllerGroup(topRightMotor, bottomRightMotor);
 
@@ -30,7 +30,7 @@ public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftmotors, rightmotors);
 
   //Declaring a gyro to allow us to know which direction the robot is in.
-  private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  private final AHRS gyro = new AHRS(SerialPort.Port.kMXP);
   
   //allows us to have a consistent acceleration instead of jumping straight to speed.
   private final SlewRateLimiter limiter = new SlewRateLimiter(1.2, 0.2);
@@ -39,7 +39,7 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     leftmotors.setInverted(true);
     
-    gyro.reset();
+    gyro.reset();;
     
     Shuffleboard.getTab("SmartDashboard").add(gyro);
     Shuffleboard.getTab("SmartDashboard").add(drive);
@@ -55,12 +55,9 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void getDirection(){
-    gyro.getAngle();  
+    gyro.getYaw();  
   }
 
-  public void calibrateGyro(){
-    gyro.calibrate();
-  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

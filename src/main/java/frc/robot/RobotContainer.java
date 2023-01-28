@@ -72,8 +72,4 @@ public class RobotContainer {
     // An example command will be run in autonomous
     return null; //Autos.exampleAuto(m_exampleSubsystem);
   }
-
-  public DriveTrain returnDriveTrain(){
-    return driveTrain;
-  }
 }
