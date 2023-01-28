@@ -27,6 +27,8 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/Shuffleboard/Main Data/DifferentialDrive[1]": "DifferentialDrive",
+      "/Shuffleboard/Main Data/MotorControllerGroup[1]": "Motor Controller",
+      "/Shuffleboard/Main Data/MotorControllerGroup[2]": "Motor Controller",
       "/Shuffleboard/Main Data/navX-Sensor[1]": "Gyro",
       "/Shuffleboard/SmartDashboard/DifferentialDrive[1]": "DifferentialDrive",
       "/Shuffleboard/SmartDashboard/navX-Sensor[1]": "Gyro"
