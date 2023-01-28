@@ -43,7 +43,10 @@ public class DriveTrain extends SubsystemBase {
     
     Shuffleboard.getTab("Main Data").add(gyro);  
     Shuffleboard.getTab("Main Data").add(drive);
-    
+
+    Shuffleboard.getTab("Main Data").add(leftmotors);
+    Shuffleboard.getTab("Main Data").add(rightmotors);
+
   }
   
   /** Allows the robot to actually drive 
@@ -61,7 +64,6 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
   }
 }
 
