@@ -1,6 +1,11 @@
 {
   "HALProvider": {
     "Other Devices": {
+      "Compressor[0]": {
+        "header": {
+          "open": true
+        }
+      },
       "Victor SPX[0]": {
         "header": {
           "open": true
@@ -10,12 +15,28 @@
         "header": {
           "open": true
         }
+      },
+      "navX-Sensor[0]": {
+        "header": {
+          "open": true
+        }
       }
     }
   },
   "NTProvider": {
     "types": {
-      "/FMSInfo": "FMSInfo"
+      "/FMSInfo": "FMSInfo",
+      "/Shuffleboard/Main Data/DifferentialDrive[1]": "DifferentialDrive",
+      "/Shuffleboard/Main Data/navX-Sensor[1]": "Gyro",
+      "/Shuffleboard/SmartDashboard/DifferentialDrive[1]": "DifferentialDrive",
+      "/Shuffleboard/SmartDashboard/navX-Sensor[1]": "Gyro"
+    },
+    "windows": {
+      "/Shuffleboard/SmartDashboard/navX-Sensor[1]": {
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables": {
@@ -24,5 +45,11 @@
         "open": true
       }
     }
+  },
+  "NetworkTables Info": {
+    "Connections": {
+      "open": true
+    },
+    "visible": true
   }
 }

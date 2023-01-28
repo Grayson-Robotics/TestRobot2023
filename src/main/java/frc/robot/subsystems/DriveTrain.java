@@ -41,8 +41,8 @@ public class DriveTrain extends SubsystemBase {
     
     gyro.reset();;
     
-    Shuffleboard.getTab("SmartDashboard").add(gyro);
-    Shuffleboard.getTab("SmartDashboard").add(drive);
+    Shuffleboard.getTab("Main Data").add(gyro);  
+    Shuffleboard.getTab("Main Data").add(drive);
     
   }
   
