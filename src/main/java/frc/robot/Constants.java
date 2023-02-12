@@ -18,8 +18,11 @@ public final class Constants {
   }
 
   public final class driveMotors {
-    public static final int m_leftMotor = 0;
-    public static final int m_rightMotor = 1;
+    public static final int m_topLeftMotor = 0;
+    public static final int m_bottomLeftMotor = 1;
+    // placeholder values.
+    public static final int m_topRightMotor = 2;
+    public static final int m_bottomRightMotor = 3;
   }
 
   public final class pneumaticSolenoids{
