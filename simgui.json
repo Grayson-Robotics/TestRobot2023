@@ -21,6 +21,16 @@
           "open": true
         }
       }
+    },
+    "Solenoids": {
+      "0": {
+        "header": {
+          "open": true
+        }
+      },
+      "window": {
+        "visible": true
+      }
     }
   },
   "NTProvider": {
@@ -30,15 +40,9 @@
       "/Shuffleboard/Main Data/MotorControllerGroup[1]": "Motor Controller",
       "/Shuffleboard/Main Data/MotorControllerGroup[2]": "Motor Controller",
       "/Shuffleboard/Main Data/navX-Sensor[1]": "Gyro",
+      "/Shuffleboard/Main Data/reset": "Command",
       "/Shuffleboard/SmartDashboard/DifferentialDrive[1]": "DifferentialDrive",
       "/Shuffleboard/SmartDashboard/navX-Sensor[1]": "Gyro"
-    },
-    "windows": {
-      "/Shuffleboard/SmartDashboard/navX-Sensor[1]": {
-        "window": {
-          "visible": true
-        }
-      }
     }
   },
   "NetworkTables": {

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -43,20 +44,23 @@ public class DriveTrain extends SubsystemBase {
   //allows us to have a consistent acceleration instead of jumping straight to speed.
   //Wprivate final SlewRateLimiter limiter = new SlewRateLimiter(1.2, 0.2);
   
+  private ShuffleboardTab main = Shuffleboard.getTab("Main Data");
+
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     leftmotors.setInverted(true);
     
-    gyro.reset();;
+    gyro.reset();
+    
     rightEncoder.reset();
 
-    Shuffleboard.getTab("Main Data").add(rightEncoder);
+    main.add(rightEncoder);
 
-    Shuffleboard.getTab("Main Data").add(gyro);  
-    Shuffleboard.getTab("Main Data").add(drive);
+    main.add(gyro);  
+    main.add(drive);
 
-    Shuffleboard.getTab("Main Data").add(leftmotors);
-    Shuffleboard.getTab("Main Data").add(rightmotors);
+    main.add(leftmotors);
+    main.add(rightmotors);
 
   }
   

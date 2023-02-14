@@ -64,7 +64,7 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.a().onTrue(new movePneumaticArm(pneumatics));
+    m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
 
   }
 
