@@ -41,7 +41,7 @@ public class DriveTrain extends SubsystemBase {
   private final AHRS gyro = new AHRS(SerialPort.Port.kMXP);
   
   //allows us to have a consistent acceleration instead of jumping straight to speed.
-  private final SlewRateLimiter limiter = new SlewRateLimiter(1.2, 0.2);
+  //Wprivate final SlewRateLimiter limiter = new SlewRateLimiter(1.2, 0.2);
   
   /** Creates a new DriveTrain. */
   public DriveTrain() {
@@ -65,11 +65,15 @@ public class DriveTrain extends SubsystemBase {
    * @param rotation How fast the robot should turn
   */
   public void drive(double speed, double rotation){
-    drive.arcadeDrive(limiter.calculate(speed), rotation);
+    drive.arcadeDrive(speed, rotation);
   }
 
   public void getDirection(){
     gyro.getYaw();  
+  }
+
+  public void resetEncoders(){
+    rightEncoder.reset();
   }
 
   @Override
