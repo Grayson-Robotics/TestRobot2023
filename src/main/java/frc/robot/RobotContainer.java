@@ -42,7 +42,7 @@ public class RobotContainer {
     Shuffleboard.getTab("Main Data").add("reset", new resetEncoders(driveTrain));
 
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
-    () -> m_driverController.getLeftY(),
+    () -> -m_driverController.getLeftY(),
     () -> m_driverController.getRightX()));
   }
   
