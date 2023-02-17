@@ -9,9 +9,12 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.movePneumaticArm;
+import frc.robot.commands.resetEncoders;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -36,8 +39,10 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     
+    Shuffleboard.getTab("Main Data").add("reset", new resetEncoders(driveTrain));
+
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
-    () -> m_driverController.getLeftY(),
+    () -> -m_driverController.getLeftY(),
     () -> m_driverController.getRightX()));
   }
   
@@ -59,7 +64,7 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.a().onTrue(new movePneumaticArm(pneumatics));
+    m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
 
   }
 

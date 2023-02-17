@@ -5,16 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.DriveTrain;
 
-public class movePneumaticArm extends CommandBase {
-  private Pneumatics pneumatics;
+public class resetEncoders extends CommandBase {
+  public DriveTrain drive;
   
-  /** Creates a new movePneumaticArm. */
-  public movePneumaticArm(Pneumatics pneumatics) {
+  
+  /** Creates a new resetGyros. */
+  public resetEncoders(DriveTrain drive) {
+    this.drive = drive;
+    
+    addRequirements(drive);
     // Use addRequirements() here to declare subsystem dependencies.
-    this.pneumatics = pneumatics;
-
   }
 
   // Called when the command is initially scheduled.
@@ -24,14 +26,12 @@ public class movePneumaticArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pneumatics.setForward();;
+    drive.resetEncoders();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    pneumatics.setReverse();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
