@@ -25,7 +25,7 @@ public class DriveTrain extends SubsystemBase {
   private final WPI_VictorSPX topLeftMotor = new WPI_VictorSPX(Constants.driveMotors.m_topLeftMotor);
   private final WPI_VictorSPX bottomLeftMotor = new WPI_VictorSPX(Constants.driveMotors.m_bottomLeftMotor);
   
-  private final CANSparkMax topRightMotor = new CANSparkMax(Constants.driveMotors.m_topRightMotor, MotorType.kBrushed);
+  private final WPI_VictorSPX topRightMotor = new WPI_VictorSPX(Constants.driveMotors.m_topRightMotor);
   private final WPI_VictorSPX bottomRightMotor = new WPI_VictorSPX(Constants.driveMotors.m_bottomRightMotor);
   
   private final MotorControllerGroup leftmotors = new MotorControllerGroup(topLeftMotor, bottomLeftMotor);
@@ -48,7 +48,7 @@ public class DriveTrain extends SubsystemBase {
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    bottomRightMotor.setInverted(true);
+    bottomLeftMotor.setInverted(true);
     rightmotors.setInverted(true);
 
     gyro.reset();

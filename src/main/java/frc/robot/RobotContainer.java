@@ -65,7 +65,6 @@ public class RobotContainer {
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
-
   }
 
   /**
