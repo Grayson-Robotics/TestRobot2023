@@ -27,31 +27,47 @@ public class Arm extends SubsystemBase {
   public Arm() {}
 
   public CommandBase raiseArm(){
-    return runOnce(
+    return runEnd(
       () -> {
         pullMotors.set(1);
-      });
+      },
+      () -> {
+        pullMotors.set(0);
+      }
+      );
   }
 
   public CommandBase dropArm(){
-    return runOnce(
+    return runEnd(
       () -> {
         pullMotors.set(-1);
-      });
+      },
+      () -> {
+        pullMotors.set(0);
+      }
+      );
   }
 
   public CommandBase pullArmIn(){
-    return runOnce(
+    return runEnd(
       () -> {
         inPull.set(1);
-      });
+      },
+      () -> {
+        inPull.set(0);
+      }
+      );
   }
 
   public CommandBase pushArmOut(){
-    return runOnce(
+    return runEnd(
       () -> {
         inPull.set(-1);
-      });
+      },
+      () -> {
+        inPull.set(0);
+      }
+      );
   }
 
   @Override
