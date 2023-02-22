@@ -70,6 +70,7 @@ public class RobotContainer {
 
     m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
     m_driverController.pov(0).whileTrue(arm.raiseArm());
+    m_driverController.pov(180).whileTrue(arm.dropArm());
   }
 
   /**

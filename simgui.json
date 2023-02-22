@@ -46,6 +46,11 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Pneumatics": "Subsystem",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/MotorControllerGroup[3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/navX-Sensor[1]": "Gyro",
       "/Shuffleboard/Main Data/DifferentialDrive[1]": "DifferentialDrive",
       "/Shuffleboard/Main Data/MotorControllerGroup[1]": "Motor Controller",
       "/Shuffleboard/Main Data/MotorControllerGroup[2]": "Motor Controller",
