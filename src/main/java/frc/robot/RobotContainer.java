@@ -10,6 +10,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.movePneumaticArm;
 import frc.robot.commands.resetEncoders;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
@@ -29,11 +30,14 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain = new DriveTrain();
   private final Pneumatics pneumatics = new Pneumatics();
-  
+  private final Arm arm = new Arm();
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
   new CommandXboxController(OperatorConstants.kDriverControllerPort);
   
+  private final CommandXboxController m_driverController2 = new CommandXboxController(OperatorConstants.kDriverControllerPort2);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings

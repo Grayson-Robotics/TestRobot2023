@@ -9,6 +9,7 @@ import org.ejml.equation.ManagerFunctions.Input1;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
@@ -25,22 +26,34 @@ public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   public Arm() {}
 
-  public void raiseArm(){
-    pullMotors.set(1);
+  public CommandBase raiseArm(){
+    return runOnce(
+      () -> {
+        pullMotors.set(1);
+      });
   }
 
-  public void dropArm(){
-    pullMotors.set(-1);
+  public CommandBase dropArm(){
+    return runOnce(
+      () -> {
+        pullMotors.set(-1);
+      });
   }
 
-  public void pullArmIn(){
-    inPull.set(1);
+  public CommandBase pullArmIn(){
+    return runOnce(
+      () -> {
+        inPull.set(1);
+      });
   }
 
-  public void pushArmOut(){
-    inPull.set(-1);
+  public CommandBase pushArmOut(){
+    return runOnce(
+      () -> {
+        inPull.set(-1);
+      });
   }
-  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
