@@ -23,13 +23,14 @@ public class Arm extends SubsystemBase {
 
   private final MotorControllerGroup pullMotors = new MotorControllerGroup(leftPull, rightPull);
 
+  private final double speed = 0.45;
   /** Creates a new Arm. */
   public Arm() {}
 
   public CommandBase raiseArm(){
     return runEnd(
       () -> {
-        pullMotors.set(1);
+        pullMotors.set(1 * speed);
       },
       () -> {
         pullMotors.set(0);
@@ -40,7 +41,7 @@ public class Arm extends SubsystemBase {
   public CommandBase dropArm(){
     return runEnd(
       () -> {
-        pullMotors.set(-1);
+        pullMotors.set(-1 * speed);
       },
       () -> {
         pullMotors.set(0);
@@ -51,7 +52,7 @@ public class Arm extends SubsystemBase {
   public CommandBase pullArmIn(){
     return runEnd(
       () -> {
-        inPull.set(1);
+        inPull.set(1 * speed);
       },
       () -> {
         inPull.set(0);
@@ -62,7 +63,7 @@ public class Arm extends SubsystemBase {
   public CommandBase pushArmOut(){
     return runEnd(
       () -> {
-        inPull.set(-1);
+        inPull.set(-1 * speed);
       },
       () -> {
         inPull.set(0);
