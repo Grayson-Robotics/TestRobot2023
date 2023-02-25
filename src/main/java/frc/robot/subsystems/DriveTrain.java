@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -35,8 +36,8 @@ public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftmotors, rightmotors);
 
   //Declaring encoders to figure out distance traveled
-  //private final Encoder leftEncoder = new Encoder(0, 1);
-  private final Encoder rightEncoder = new Encoder(0, 1);
+  private final Encoder leftEncoder = new Encoder(0, 1);
+  private final Encoder rightEncoder = new Encoder(2, 3);
 
   //Declaring a gyro to allow us to know which direction the robot is in.
   private final AHRS gyro = new AHRS(SerialPort.Port.kMXP);
@@ -46,15 +47,26 @@ public class DriveTrain extends SubsystemBase {
   
   private ShuffleboardTab main = Shuffleboard.getTab("Main Data");
 
+  private final DifferentialDriveOdometry odometry;
+
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     bottomLeftMotor.setInverted(true);
     rightmotors.setInverted(true);
 
-    gyro.reset();
     
+    leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    
+    gyro.reset();
+    leftEncoder.reset();
     rightEncoder.reset();
 
+
+
+    odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), leftEncoder.getDistance(), rightEncoder.getDistance());
+
+    main.add(leftEncoder);
     main.add(rightEncoder);
 
     main.add(gyro);  
@@ -62,6 +74,8 @@ public class DriveTrain extends SubsystemBase {
 
     main.add(leftmotors);
     main.add(rightmotors);
+
+
 
   }
   
