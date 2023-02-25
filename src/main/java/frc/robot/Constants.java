@@ -24,6 +24,8 @@ public final class Constants {
     // placeholder values.
     public static final int m_topRightMotor = 1;
     public static final int m_bottomRightMotor = 0;
+
+    public static final double distancePerPulse = 0;
   }
 
   public final class armMotors {
