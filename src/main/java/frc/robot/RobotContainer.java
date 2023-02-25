@@ -46,8 +46,8 @@ public class RobotContainer {
     Shuffleboard.getTab("Main Data").add("reset", new resetEncoders(driveTrain));
 
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
-    () -> -m_driverController.getLeftY(),
-    () -> m_driverController.getRightX()));
+    () -> m_driverController.getLeftY(),
+    () -> -m_driverController.getRightX()));
   }
   
   /**
@@ -71,6 +71,8 @@ public class RobotContainer {
     m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
     m_driverController.pov(0).whileTrue(arm.raiseArm());
     m_driverController.pov(180).whileTrue(arm.dropArm());
+    m_driverController.leftTrigger().whileTrue(arm.pushArmOut());
+    m_driverController.rightTrigger().whileTrue(arm.pullArmIn());
   }
 
   /**
