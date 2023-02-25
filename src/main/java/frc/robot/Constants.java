@@ -37,4 +37,6 @@ public final class Constants {
     public static final int solenoid1_F = 0;
     public static final int solenoid1_R = 1;
   }
+
+  public static final double lengthInInches = 21.75;
 }

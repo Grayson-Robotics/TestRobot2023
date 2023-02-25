@@ -30,7 +30,7 @@ public class Arm extends SubsystemBase {
   public CommandBase raiseArm(){
     return runEnd(
       () -> {
-        pullMotors.set(1 * speed);
+        pullMotors.set(-1 * speed);
       },
       () -> {
         pullMotors.set(0);
@@ -41,7 +41,7 @@ public class Arm extends SubsystemBase {
   public CommandBase dropArm(){
     return runEnd(
       () -> {
-        pullMotors.set(-1 * speed);
+        pullMotors.set(1 * speed);
       },
       () -> {
         pullMotors.set(0);

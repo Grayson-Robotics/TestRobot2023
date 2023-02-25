@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -36,11 +37,14 @@ public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftmotors, rightmotors);
 
   //Declaring encoders to figure out distance traveled
-  private final Encoder leftEncoder = new Encoder(0, 1);
-  private final Encoder rightEncoder = new Encoder(2, 3);
+  private final Encoder leftEncoder = new Encoder(2, 3);
+  private final Encoder rightEncoder = new Encoder(0, 1);
 
   //Declaring a gyro to allow us to know which direction the robot is in.
   private final AHRS gyro = new AHRS(SerialPort.Port.kMXP);
+
+  private final Field2d m_field = new Field2d();
+
   
   //allows us to have a consistent acceleration instead of jumping straight to speed.
   //Wprivate final SlewRateLimiter limiter = new SlewRateLimiter(1.2, 0.2);
@@ -48,23 +52,22 @@ public class DriveTrain extends SubsystemBase {
   private ShuffleboardTab main = Shuffleboard.getTab("Main Data");
 
   private final DifferentialDriveOdometry odometry;
-
+  
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     bottomLeftMotor.setInverted(true);
     rightmotors.setInverted(true);
 
-    
-    leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
-    leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
-    
     gyro.reset();
+    
+
+    //leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    //rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+
     leftEncoder.reset();
     rightEncoder.reset();
 
-
-
-    odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), leftEncoder.getDistance(), rightEncoder.getDistance());
+    odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), leftEncoder.getDistance(), leftEncoder.getDistance());
 
     main.add(leftEncoder);
     main.add(rightEncoder);
@@ -74,8 +77,7 @@ public class DriveTrain extends SubsystemBase {
 
     main.add(leftmotors);
     main.add(rightmotors);
-
-
+    main.add(m_field);
 
   }
   
@@ -92,12 +94,16 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void resetEncoders(){
+    leftEncoder.reset();
     rightEncoder.reset();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
+    odometry.update(gyro.getRotation2d(), leftEncoder.getDistance(), rightEncoder.getDistance());
+    m_field.setRobotPose(odometry.getPoseMeters());
   }
 }
 
