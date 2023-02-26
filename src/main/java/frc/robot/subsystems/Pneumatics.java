@@ -28,7 +28,7 @@ public class Pneumatics extends SubsystemBase {
 
     
     
-    solenoid1.set(Value.kReverse);
+    solenoid1.set(Value.kOff);
   }
 
   public void toggle(){
