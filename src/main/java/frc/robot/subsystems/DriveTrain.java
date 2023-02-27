@@ -70,14 +70,14 @@ public class DriveTrain extends SubsystemBase {
 
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), leftEncoder.getDistance(), leftEncoder.getDistance());
 
-    main.add(leftEncoder);
-    main.add(rightEncoder);
+    main.add("Left Encoder",leftEncoder);
+    main.add("Right Encoder", rightEncoder);
 
     main.add(gyro);  
     main.add(drive);
 
-    main.add(leftmotors);
-    main.add(rightmotors);
+    main.add("Left Motors",leftmotors);
+    main.add("Right Motors",rightmotors);
     main.add(m_field);
 
   }
