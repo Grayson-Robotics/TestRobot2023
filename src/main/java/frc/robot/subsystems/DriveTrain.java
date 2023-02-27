@@ -13,6 +13,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -37,8 +38,8 @@ public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftmotors, rightmotors);
 
   //Declaring encoders to figure out distance traveled
-  private final Encoder leftEncoder = new Encoder(2, 3);
-  private final Encoder rightEncoder = new Encoder(0, 1);
+  private final Encoder leftEncoder = new Encoder(2, 3, false, EncodingType.k1X);
+  private final Encoder rightEncoder = new Encoder(0, 1, false, EncodingType.k1X);
 
   //Declaring a gyro to allow us to know which direction the robot is in.
   private final AHRS gyro = new AHRS(SerialPort.Port.kMXP);
