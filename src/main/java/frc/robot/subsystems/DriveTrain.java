@@ -80,6 +80,7 @@ public class DriveTrain extends SubsystemBase {
     main.add("Right Motors",rightmotors);
     main.add(m_field);
 
+    drive.setDeadband(0.2);
   }
   
   /** Allows the robot to actually drive 
