@@ -24,13 +24,14 @@ public class Arm extends SubsystemBase {
   private final MotorControllerGroup pullMotors = new MotorControllerGroup(leftPull, rightPull);
 
   private final double speed = 0.45;
+  private final double upSpeed = 0.65;
   /** Creates a new Arm. */
   public Arm() {}
 
   public CommandBase raiseArm(){
     return runEnd(
       () -> {
-        pullMotors.set(-1 * speed);
+        pullMotors.set(-1 * upSpeed);
       },
       () -> {
         pullMotors.set(0);
