@@ -73,6 +73,17 @@
       "/Shuffleboard/Main Data/reset": "Command",
       "/Shuffleboard/SmartDashboard/DifferentialDrive[1]": "DifferentialDrive",
       "/Shuffleboard/SmartDashboard/navX-Sensor[1]": "Gyro"
+    },
+    "windows": {
+      "/Shuffleboard/Main Data/Field": {
+        "traj": {
+          "arrows": false,
+          "style": "Line"
+        },
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables": {

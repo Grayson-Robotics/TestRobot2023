@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Robot;
 import frc.robot.Constants.voltConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -54,9 +55,9 @@ TrajectoryConfig config =
           voltConstants.kMaxSpeedMetersPerSecond, 
           voltConstants.kMaxAccelerationMetersPerSecondSquared)
       // Add kinematics to ensure max speed is actually obeyed
-      .setKinematics(voltConstants.kDriveKinematics);
+      .setKinematics(voltConstants.kDriveKinematics)
       // Apply the voltage constraint
-      //.addConstraint(autoVoltageConstraint
+      .addConstraint(autoVoltageConstraint);
 
 // An example trajectory to follow.  All units in meters.
 Trajectory exampleTrajectory =
@@ -64,11 +65,13 @@ Trajectory exampleTrajectory =
       // Start at the origin facing the +X direction
       new Pose2d(0, 0, new Rotation2d(0)),
       // Pass through these two interior waypoints, making an 's' curve path
-      List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+      List.of(new Translation2d(1, 0), new Translation2d(2, 0)),
       // End 3 meters straight ahead of where we started, facing forward
       new Pose2d(3, 0, new Rotation2d(0)),
       // Pass config
       config);
+
+drive.returnField2d().getObject("traj").setTrajectory(exampleTrajectory);
 
 RamseteCommand ramseteCommand =
   new RamseteCommand(

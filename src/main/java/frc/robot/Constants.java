@@ -27,7 +27,7 @@ public final class Constants {
     public static final int m_topRightMotor = 2;
     public static final int m_bottomRightMotor = 3;
 
-    public static final double distancePerPulse = 1024;
+    public static final double distancePerPulse = (0.1524 * Math.PI)/4096;
   }
 
   public final class armMotors {
@@ -41,17 +41,17 @@ public final class Constants {
   }
 
   public final static class voltConstants {
-    public static final double ksVolts = 0.96585;
-    public static final double kvVolts = 5.7548;
-    public static final double kaVolts = 3.2737;
+    public static final double ksVolts = 0.87806;
+    public static final double kvVolts = 5.5398;
+    public static final double kaVolts = 2.5303;
 
-    public static final double kpDrive = 9.4721;
+    public static final double kpDrive = 8.9162;
 
     public static final double kTrackwidthMeters = 0.33779;
     public static final DifferentialDriveKinematics kDriveKinematics =
         new DifferentialDriveKinematics(kTrackwidthMeters);
 
-    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxSpeedMetersPerSecond = 1;
     public static final double kMaxAccelerationMetersPerSecondSquared = 1;
 
     public static final double kRamseteB = 2;

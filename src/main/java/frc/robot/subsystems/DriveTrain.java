@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class DriveTrain extends SubsystemBase {
   
@@ -61,14 +62,14 @@ public class DriveTrain extends SubsystemBase {
     gyro.reset();
     
 
-    leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
-    rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    //leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    //rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
 
     resetEncoders();
 
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), leftEncoder.getDistance(), leftEncoder.getDistance());
 
-    main.add("Left Encoder",leftEncoder);
+    main.add("Left Encoder", leftEncoder);
     main.add("Right Encoder", rightEncoder);
 
     main.add(gyro);  
@@ -116,6 +117,10 @@ public class DriveTrain extends SubsystemBase {
     resetEncoders();
     odometry.resetPosition(
         gyro.getRotation2d(), leftEncoder.getDistance(), rightEncoder.getDistance(), pose);
+  }
+
+  public Field2d returnField2d(){
+    return m_field;
   }
 
   @Override
