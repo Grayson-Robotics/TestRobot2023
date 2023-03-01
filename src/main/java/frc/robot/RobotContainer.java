@@ -36,7 +36,8 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
   new CommandXboxController(OperatorConstants.kDriverControllerPort);
   
-  private final CommandXboxController m_driverController2 = new CommandXboxController(OperatorConstants.kDriverControllerPort2);
+  private final CommandXboxController m_driverController2 =
+   new CommandXboxController(OperatorConstants.kDriverControllerPort2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -68,11 +69,19 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
-    m_driverController.pov(0).whileTrue(arm.raiseArm());
-    m_driverController.pov(180).whileTrue(arm.dropArm());
-    m_driverController.leftTrigger().whileTrue(arm.pushArmOut());
-    m_driverController.rightTrigger().whileTrue(arm.pullArmIn());
+    // m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
+    // m_driverController.pov(0).whileTrue(arm.raiseArm());
+    // m_driverController.pov(180).whileTrue(arm.dropArm());
+    // m_driverController.leftTrigger().whileTrue(arm.pushArmOut());
+    // m_driverController.rightTrigger().whileTrue(arm.pullArmIn());
+
+    //controls for the second controller
+    m_driverController2.a().toggleOnTrue(new movePneumaticArm(pneumatics));
+    m_driverController2.pov(0).whileTrue(arm.raiseArm());
+    m_driverController2.pov(180).whileTrue(arm.dropArm());
+    m_driverController2.leftTrigger().whileTrue(arm.pushArmOut());
+    m_driverController2.rightTrigger().whileTrue(arm.pullArmIn());
+
   }
 
   /**
