@@ -16,6 +16,26 @@
           "open": true
         }
       },
+      "Victor SPX[2]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[3]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[4]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[5]": {
+        "header": {
+          "open": true
+        }
+      },
       "navX-Sensor[0]": {
         "header": {
           "open": true
@@ -36,13 +56,34 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Pneumatics": "Subsystem",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/MotorControllerGroup[3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/navX-Sensor[1]": "Gyro",
       "/Shuffleboard/Main Data/DifferentialDrive[1]": "DifferentialDrive",
+      "/Shuffleboard/Main Data/Field": "Field2d",
+      "/Shuffleboard/Main Data/Left Motors": "Motor Controller",
       "/Shuffleboard/Main Data/MotorControllerGroup[1]": "Motor Controller",
       "/Shuffleboard/Main Data/MotorControllerGroup[2]": "Motor Controller",
+      "/Shuffleboard/Main Data/Right Motors": "Motor Controller",
+      "/Shuffleboard/Main Data/armDown": "Command",
+      "/Shuffleboard/Main Data/armUP": "Command",
       "/Shuffleboard/Main Data/navX-Sensor[1]": "Gyro",
       "/Shuffleboard/Main Data/reset": "Command",
       "/Shuffleboard/SmartDashboard/DifferentialDrive[1]": "DifferentialDrive",
       "/Shuffleboard/SmartDashboard/navX-Sensor[1]": "Gyro"
+    },
+    "windows": {
+      "/Shuffleboard/Main Data/Field": {
+        "traj": {
+          "arrows": false,
+          "style": "Line"
+        },
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables": {
