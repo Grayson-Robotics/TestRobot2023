@@ -6,7 +6,10 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -58,11 +61,10 @@ public class DriveTrain extends SubsystemBase {
     gyro.reset();
     
 
-    //leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
-    //rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
 
-    leftEncoder.reset();
-    rightEncoder.reset();
+    resetEncoders();
 
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), leftEncoder.getDistance(), leftEncoder.getDistance());
 
@@ -94,6 +96,26 @@ public class DriveTrain extends SubsystemBase {
   public void resetEncoders(){
     leftEncoder.reset();
     rightEncoder.reset();
+  }
+
+  public DifferentialDriveWheelSpeeds getSpeeds(){
+    return new DifferentialDriveWheelSpeeds(leftEncoder.getRate(), rightEncoder.getRate());
+  }
+
+  public Pose2d getPose(){
+    return odometry.getPoseMeters();
+  }
+
+  public void tankDriveVolts(double leftVolts, double rightVolts){
+    leftmotors.setVoltage(leftVolts);
+    rightmotors.setVoltage(rightVolts);
+    drive.feed();
+  }
+  
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    odometry.resetPosition(
+        gyro.getRotation2d(), leftEncoder.getDistance(), rightEncoder.getDistance(), pose);
   }
 
   @Override

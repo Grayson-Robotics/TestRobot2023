@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.movePneumaticArm;
 import frc.robot.commands.resetEncoders;
@@ -89,6 +90,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null; //Autos.exampleAuto(m_exampleSubsystem);
+    return Autos.ramseteCommand(driveTrain); //Autos.exampleAuto(m_exampleSubsystem);
   }
 }
