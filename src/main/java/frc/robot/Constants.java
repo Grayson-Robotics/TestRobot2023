@@ -47,7 +47,7 @@ public final class Constants {
 
     public static final double kpDrive = 9.4721;
 
-    public static final double kTrackwidthMeters = 0.55245;
+    public static final double kTrackwidthMeters = 0.33779;
     public static final DifferentialDriveKinematics kDriveKinematics =
         new DifferentialDriveKinematics(kTrackwidthMeters);
 
