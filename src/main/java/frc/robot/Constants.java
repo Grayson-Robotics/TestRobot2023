@@ -19,11 +19,11 @@ public final class Constants {
   }
 
   public final class driveMotors {
-    public static final int m_topLeftMotor = 3;
-    public static final int m_bottomLeftMotor = 2;
+    public static final int m_topLeftMotor = 0;
+    public static final int m_bottomLeftMotor = 1;
     // placeholder values.
-    public static final int m_topRightMotor = 1;
-    public static final int m_bottomRightMotor = 0;
+    public static final int m_topRightMotor = 2;
+    public static final int m_bottomRightMotor = 3;
 
     public static final double distancePerPulse = 0;
   }
