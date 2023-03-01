@@ -54,9 +54,9 @@ TrajectoryConfig config =
           voltConstants.kMaxSpeedMetersPerSecond,
           voltConstants.kMaxAccelerationMetersPerSecondSquared)
       // Add kinematics to ensure max speed is actually obeyed
-      .setKinematics(voltConstants.kDriveKinematics);
+      .setKinematics(voltConstants.kDriveKinematics)
       // Apply the voltage constraint
-      //.addConstraint(autoVoltageConstraint);
+      .addConstraint(autoVoltageConstraint);
 
 // An example trajectory to follow.  All units in meters.
 Trajectory exampleTrajectory =
