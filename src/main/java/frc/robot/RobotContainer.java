@@ -40,6 +40,8 @@ public class RobotContainer {
     configureBindings();
     
     Shuffleboard.getTab("Main Data").add("reset", new resetEncoders(driveTrain));
+    Shuffleboard.getTab("Main Data").add("armUP", arm.raiseArm());
+    Shuffleboard.getTab("Main Data").add("armDown", arm.dropArm());
 
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
     () -> m_driverController.getLeftY(),
