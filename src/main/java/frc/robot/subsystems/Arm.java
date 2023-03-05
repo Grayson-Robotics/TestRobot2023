@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import org.ejml.equation.ManagerFunctions.Input1;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;

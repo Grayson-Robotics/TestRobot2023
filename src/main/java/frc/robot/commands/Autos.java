@@ -4,14 +4,11 @@
 
 package frc.robot.commands;
 
-import frc.robot.Robot;
 import frc.robot.Constants.voltConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 
 import java.util.List;
-
-import com.kauailabs.navx.frc.Tracer;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
