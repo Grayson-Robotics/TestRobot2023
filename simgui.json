@@ -1,5 +1,17 @@
 {
   "HALProvider": {
+    "Encoders": {
+      "0": {
+        "header": {
+          "open": true
+        }
+      },
+      "1": {
+        "header": {
+          "open": true
+        }
+      }
+    },
     "Other Devices": {
       "Compressor[0]": {
         "header": {
@@ -32,11 +44,6 @@
         }
       },
       "Victor SPX[5]": {
-        "header": {
-          "open": true
-        }
-      },
-      "navX-Sensor[0]": {
         "header": {
           "open": true
         }

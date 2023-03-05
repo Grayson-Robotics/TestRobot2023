@@ -61,9 +61,8 @@ public class DriveTrain extends SubsystemBase {
     
     gyro.reset();
     
-
-    //leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
-    //rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
+    rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
 
     resetEncoders();
 
@@ -86,10 +85,13 @@ public class DriveTrain extends SubsystemBase {
    * @param speed How fast the robot should move forward
    * @param rotation How fast the robot should turn
   */
-  public void drive(double speed, double rotation){
+  public void arcadeDrive(double speed, double rotation){
     drive.arcadeDrive(speed, rotation);
   }
 
+  public void tankDrive(double leftSpeed, double rightSpeed){
+    drive.tankDrive(leftSpeed, rightSpeed);
+  }
   public void getDirection(){
     gyro.getYaw();  
   }

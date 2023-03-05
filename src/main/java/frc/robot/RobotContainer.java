@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.voltConstants;
+import frc.robot.commands.AutoTest;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.movePneumaticArm;
@@ -27,6 +28,7 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -91,6 +93,14 @@ public class RobotContainer {
     // m_driverController.rightTrigger().whileTrue(arm.pullArmIn());
 
     //controls for the second controller
+    /*
+    m_driverController.a().toggleOnTrue(new movePneumaticArm(pneumatics));
+    m_driverController.pov(0).whileTrue(arm.raiseArm());
+    m_driverController.pov(180).whileTrue(arm.dropArm());
+    m_driverController.leftTrigger().whileTrue(arm.pushArmOut());
+    m_driverController.rightTrigger().whileTrue(arm.pullArmIn());
+    */
+
     m_driverController2.a().toggleOnTrue(new movePneumaticArm(pneumatics));
     m_driverController2.pov(0).whileTrue(arm.raiseArm());
     m_driverController2.pov(180).whileTrue(arm.dropArm());
@@ -106,6 +116,28 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null; //Autos.exampleAuto(m_exampleSubsystem);
+    return Autos.ramseteCommand(driveTrain); //Autos.exampleAuto(m_exampleSubsystem);
   }
+
+  /*
+  public CommandXboxController whichDrivesY(CommandXboxController controller1, CommandXboxController controller2){
+    CommandXboxController controller = controller1;
+
+    if(Math.abs(controller2.getLeftY()) > Math.abs(controller1.getLeftY())){
+      controller = controller2;
+    }
+
+    return controller;
+  }
+
+  public CommandXboxController whichDrivesX(CommandXboxController controller1, CommandXboxController controller2){
+    CommandXboxController controller = controller1;
+
+    if(Math.abs(controller2.getRightX()) > Math.abs(controller1.getLeftY())){
+      controller = controller2;
+    }
+
+    return controller;
+  }
+  */
 }
