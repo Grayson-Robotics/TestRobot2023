@@ -84,6 +84,8 @@ public class RobotContainer {
     m_driverController.rightTrigger().whileTrue(arm.pullArmIn());
     */
 
+    m_driverController.rightBumper().whileTrue(new resetEncoders(driveTrain));
+
     m_driverController2.a().toggleOnTrue(new movePneumaticArm(pneumatics));
     m_driverController2.pov(0).whileTrue(arm.raiseArm());
     m_driverController2.pov(180).whileTrue(arm.dropArm());

@@ -27,7 +27,8 @@ public final class Constants {
     public static final int m_topRightMotor = 2;
     public static final int m_bottomRightMotor = 3;
 
-    public static final double distancePerPulse = 0.0000399940171;
+    public static final double distancePerPulse = (1f/4096f) * (0.1524 * Math.PI);
+    public static final double distancePerPulse2 = 0.0000399940171;
   }
 
   public final class armMotors {
