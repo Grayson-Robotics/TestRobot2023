@@ -27,7 +27,7 @@ public final class Constants {
     public static final int m_topRightMotor = 2;
     public static final int m_bottomRightMotor = 3;
 
-    public static final double distancePerPulse = (1f/1024f) * (0.1524 * Math.PI);
+    public static final double distancePerPulse = (1f/1024f) * (0.1524 * Math.PI); // this is the distance traveled for every pulse of the encoder, calculated from 1/cpr (srx encoder is normally 4096 but since we have it in the 1x encoder mode it's divided by 4)* (diameter of wheel in preferred units * pi)
     public static final double distancePerPulse2 = 0.0000399940171;
   }
 
