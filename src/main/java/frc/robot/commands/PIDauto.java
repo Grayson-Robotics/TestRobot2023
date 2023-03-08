@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -18,15 +19,15 @@ public class PIDauto extends PIDCommand {
   public PIDauto(DriveTrain drive) {
     super(
         // The controller that the command will use
-        new PIDController(0, 0, 0),
+        new PIDController(1.3, 0, 0.05),
         // This should return the measurement
-        () -> drive.returnDistance(),
+        () -> drive.getRightEncoder().getDistance(),
         // This should return the setpoint (can also be a constant)
-        () -> 10,
+        () -> 2,
         // This uses the output
         output -> {
           // Use the output here
-          drive.arcadeDrive(output, 0);
+          drive.arcadeDrive(MathUtil.clamp(-output,-0.5, 0.5), 0);
         });
     this.driveTrain = drive;
     // Use addRequirements() here to declare subsystem dependencies.

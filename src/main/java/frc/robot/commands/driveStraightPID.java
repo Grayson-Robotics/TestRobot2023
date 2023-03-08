@@ -19,10 +19,10 @@ public class driveStraightPID extends PIDCommand {
   DriveTrain driveTrain;
   
   /** Creates a new driveStraightPID. */
-  public driveStraightPID(DriveTrain drive, DoubleSupplier speed, DoubleSupplier rotation) {
+  public driveStraightPID(DriveTrain drive, DoubleSupplier speed) {
     super(
         // The controller that the command will use
-        new PIDController(0, 0, 0),
+        new PIDController(1.3, 0, 0),
         // This should return the measurement
         () -> drive.getTurnRate(),
         // This should return the setpoint (can also be a constant)
@@ -30,7 +30,7 @@ public class driveStraightPID extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          drive.arcadeDrive(speed.getAsDouble(), output + rotation.getAsDouble());
+          drive.arcadeDrive(speed.getAsDouble(), output);
         });
         this.driveTrain = drive;
     // Use addRequirements() here to declare subsystem dependencies.

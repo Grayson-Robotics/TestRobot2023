@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -107,6 +108,14 @@ public class DriveTrain extends SubsystemBase {
     rightEncoder.reset();
   }
 
+  public Encoder getLeftEncoder() {
+      return leftEncoder;
+  }
+
+  public Encoder getRightEncoder() {
+      return rightEncoder;
+  }
+  
   public DifferentialDriveWheelSpeeds getSpeeds(){
     return new DifferentialDriveWheelSpeeds(leftEncoder.getRate(), rightEncoder.getRate());
   }
@@ -144,6 +153,8 @@ public class DriveTrain extends SubsystemBase {
 
     odometry.update(gyro.getRotation2d(), leftEncoder.getDistance(), rightEncoder.getDistance());
     m_field.setRobotPose(odometry.getPoseMeters());
+    
+    SmartDashboard.putNumber("turnrate", getTurnRate());
   }
 }
 

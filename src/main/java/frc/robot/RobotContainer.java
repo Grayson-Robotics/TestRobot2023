@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.PIDauto;
 import frc.robot.commands.driveStraightPID;
 import frc.robot.commands.movePneumaticArm;
 import frc.robot.commands.resetEncoders;
@@ -47,7 +48,7 @@ public class RobotContainer {
     Shuffleboard.getTab("Main Data").add("armUP", arm.raiseArm());
     Shuffleboard.getTab("Main Data").add("armDown", arm.dropArm());
 
-    driveTrain.setDefaultCommand(new driveStraightPID(driveTrain,
+    driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
     () -> m_driverController.getLeftY(),
     () -> m_driverController.getRightX()));
   }
@@ -93,6 +94,7 @@ public class RobotContainer {
     m_driverController2.leftTrigger().whileTrue(arm.pushArmOut());
     m_driverController2.rightTrigger().whileTrue(arm.pullArmIn());
 
+    m_driverController.leftBumper().whileTrue(new driveStraightPID(driveTrain, () -> m_driverController.getLeftY()));
   }
 
   /**
@@ -102,7 +104,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.ramseteCommand(driveTrain); //Autos.exampleAuto(m_exampleSubsystem);
+    return new PIDauto(driveTrain); //Autos.exampleAuto(m_exampleSubsystem);
   }
 
   /*
