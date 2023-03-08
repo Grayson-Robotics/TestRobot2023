@@ -4,48 +4,42 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.DriveTrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class driveStraightPID extends PIDCommand {
-  
+public class autoBalance extends PIDCommand {
+ 
   DriveTrain driveTrain;
-  
-  /** Creates a new driveStraightPID. */
-  public driveStraightPID(DriveTrain drive, DoubleSupplier speed, DoubleSupplier rotation) {
+
+  /** Creates a new autoBalance. */
+  public autoBalance(DriveTrain drive) {
     super(
         // The controller that the command will use
         new PIDController(0, 0, 0),
         // This should return the measurement
-        () -> drive.getTurnRate(),
+        () -> drive.getPitch(),
         // This should return the setpoint (can also be a constant)
         () -> 0,
         // This uses the output
         output -> {
           // Use the output here
-          drive.arcadeDrive(speed.getAsDouble(), output + rotation.getAsDouble());
+          
         });
-        this.driveTrain = drive;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
-    // Configure additional PID options by calling `getController` here.
-  }
 
-  
-  public PIDController returnController(){
-    return getController();
+    this.driveTrain = drive;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drive);
+    // Configure additional PID options by calling `getController` here.
+    getController().setTolerance(2);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return driveTrain.getPitch() == 0;
   }
 }
