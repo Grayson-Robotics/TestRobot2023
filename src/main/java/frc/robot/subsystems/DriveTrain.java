@@ -91,10 +91,13 @@ public class DriveTrain extends SubsystemBase {
   public void tankDrive(double leftSpeed, double rightSpeed){
     drive.tankDrive(leftSpeed, rightSpeed);
   }
-  public void getDirection(){
-    gyro.getYaw();  
+  public float getDirection(){
+    return gyro.getYaw();  
   }
 
+  public double getTurnRate(){
+    return gyro.getRate();
+  }
   public void resetEncoders(){
     leftEncoder.reset();
     rightEncoder.reset();
@@ -124,6 +127,9 @@ public class DriveTrain extends SubsystemBase {
     return m_field;
   }
 
+  public double returnDistance(){
+    return leftEncoder.getDistance() + rightEncoder.getDistance() / 2.0;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
