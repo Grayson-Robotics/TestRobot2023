@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.driveStraightPID;
 import frc.robot.commands.movePneumaticArm;
 import frc.robot.commands.resetEncoders;
 import frc.robot.subsystems.Arm;
@@ -46,7 +47,7 @@ public class RobotContainer {
     Shuffleboard.getTab("Main Data").add("armUP", arm.raiseArm());
     Shuffleboard.getTab("Main Data").add("armDown", arm.dropArm());
 
-    driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
+    driveTrain.setDefaultCommand(new driveStraightPID(driveTrain,
     () -> m_driverController.getLeftY(),
     () -> m_driverController.getRightX()));
   }

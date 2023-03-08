@@ -38,10 +38,6 @@ public class driveStraightPID extends PIDCommand {
     // Configure additional PID options by calling `getController` here.
   }
 
-  
-  public PIDController returnController(){
-    return getController();
-  }
 
   // Returns true when the command should end.
   @Override

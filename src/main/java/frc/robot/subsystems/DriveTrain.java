@@ -98,6 +98,10 @@ public class DriveTrain extends SubsystemBase {
   public double getTurnRate(){
     return gyro.getRate();
   }
+
+  public double getPitch(){
+    return gyro.getPitch();
+  }
   public void resetEncoders(){
     leftEncoder.reset();
     rightEncoder.reset();
@@ -129,6 +133,10 @@ public class DriveTrain extends SubsystemBase {
 
   public double returnDistance(){
     return leftEncoder.getDistance() + rightEncoder.getDistance() / 2.0;
+  }
+
+  public void resetGyro(){
+    gyro.reset();
   }
   @Override
   public void periodic() {
