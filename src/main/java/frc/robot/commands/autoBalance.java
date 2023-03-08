@@ -4,42 +4,42 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
 import frc.robot.subsystems.DriveTrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class autoBalance extends PIDCommand {
- 
-  DriveTrain driveTrain;
-
+public class autoBalance extends ProfiledPIDCommand {
   /** Creates a new autoBalance. */
   public autoBalance(DriveTrain drive) {
     super(
-        // The controller that the command will use
-        new PIDController(0, 0, 0),
+        // The ProfiledPIDController used by the command
+        new ProfiledPIDController(
+            // The PID gains
+            0,
+            0,
+            0,
+            // The motion profile constraints
+            new TrapezoidProfile.Constraints(0, 0)),
         // This should return the measurement
         () -> drive.getPitch(),
-        // This should return the setpoint (can also be a constant)
+        // This should return the goal (can also be a constant)
         () -> 0,
         // This uses the output
-        output -> {
-          // Use the output here
+        (output, setpoint) -> {
+          // Use the output (and setpoint, if desired) here
           
         });
-
-    this.driveTrain = drive;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drive);
     // Configure additional PID options by calling `getController` here.
-    getController().setTolerance(2);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return driveTrain.getPitch() == 0;
+    return false;
   }
 }
