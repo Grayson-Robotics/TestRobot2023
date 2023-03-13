@@ -21,7 +21,7 @@ public class PIDauto extends PIDCommand {
         // The controller that the command will use
         new PIDController(1.3, 0, 0.05),
         // This should return the measurement
-        () -> drive.getRightEncoder().getDistance(),
+        () -> drive.returnDistance(),
         // This should return the setpoint (can also be a constant)
         () -> 2,
         // This uses the output
