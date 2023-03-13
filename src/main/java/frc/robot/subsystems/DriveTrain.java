@@ -141,7 +141,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double returnDistance(){
-    return leftEncoder.getDistance() + rightEncoder.getDistance() / 2.0;
+    return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2.0;
   }
 
   public void resetGyro(){
