@@ -34,7 +34,7 @@ public final class Autos {
   }
   
   public static CommandBase autonomous(DriveTrain drive, Arm arm, Pneumatics pneumatics){
-    return Commands.sequence(new AutoTest(drive, arm, pneumatics), new PIDauto(drive));
+    return Commands.sequence(new resetEncoders(drive),new AutoTest(drive, arm, pneumatics), new PIDauto(drive));
   }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
