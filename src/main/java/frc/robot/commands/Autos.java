@@ -5,8 +5,10 @@
 package frc.robot.commands;
 
 import frc.robot.Constants.voltConstants;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Pneumatics;
 
 import java.util.List;
 
@@ -30,7 +32,10 @@ public final class Autos {
   public static CommandBase exampleAuto(ExampleSubsystem subsystem) {
     return Commands.sequence(subsystem.exampleMethodCommand());
   }
-
+  
+  public static CommandBase autonomous(DriveTrain drive, Arm arm, Pneumatics pneumatics){
+    return Commands.sequence(new AutoTest(drive, arm, pneumatics), new PIDauto(drive));
+  }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }

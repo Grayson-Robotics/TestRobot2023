@@ -24,7 +24,7 @@ public class Pneumatics extends SubsystemBase {
     main.add("Compressor Pressure", 0);
     main.add(solenoid1);
 
-    
+    solenoid1.set(Value.kForward);
     
     //solenoid1.set(Value.kOff);
   }

@@ -104,7 +104,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.ramseteCommand(driveTrain); //Autos.exampleAuto(m_exampleSubsystem);
+    return Autos.autonomous(driveTrain, arm, pneumatics); //Autos.exampleAuto(m_exampleSubsystem);
   }
 
   /*

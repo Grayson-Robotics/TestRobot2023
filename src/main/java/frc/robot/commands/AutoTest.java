@@ -36,15 +36,13 @@ public class AutoTest extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(time.get() > 0 && time.get() < 2.5){
+    if(time.get() > 0 && time.get() < 1){
       arm.dropArmManual();
+      pincher.setReverse();
     }
     if(time.get() > 2.5 && time.get() < 2.7){
       arm.stopArm();
-      pincher.setReverse();
-    }
-    if(time.get() > 2.7  && time.get() < 6){
-      drive.tankDrive(-0.5, -0.5); //not -1 -1 as the second value is for rotations. oh and full speed's probably not the greatest idea lol
+      
     }
   }
 
@@ -57,6 +55,6 @@ public class AutoTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return time.get() > 20;
+    return time.get() > 2.8;
   }
 }

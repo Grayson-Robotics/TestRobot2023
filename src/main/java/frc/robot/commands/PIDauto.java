@@ -23,7 +23,7 @@ public class PIDauto extends PIDCommand {
         // This should return the measurement
         () -> drive.returnDistance(),
         // This should return the setpoint (can also be a constant)
-        () -> 2,
+        () -> 4,
         // This uses the output
         output -> {
           // Use the output here
