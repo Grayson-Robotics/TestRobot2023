@@ -14,7 +14,7 @@ import frc.robot.commands.resetEncoders;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Pneumatics;
-
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -51,6 +51,13 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
     () -> m_driverController.getLeftY(),
     () -> m_driverController.getRightX()));
+
+    //only for testing
+    if (RobotBase.isSimulation()){
+      driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
+      () -> m_driverController.getRawAxis(0),
+      () -> m_driverController.getRawAxis(1)));
+    }
   }
   
   /**
