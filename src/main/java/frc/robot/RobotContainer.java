@@ -13,10 +13,13 @@ import frc.robot.commands.movePneumaticArm;
 import frc.robot.commands.resetEncoders;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -31,6 +34,8 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final Pneumatics pneumatics = new Pneumatics();
   private final Arm arm = new Arm();
+  private final ExampleSubsystem exam = new ExampleSubsystem();
+  private boolean speedSlow = false;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -49,17 +54,19 @@ public class RobotContainer {
     Shuffleboard.getTab("Main Data").add("armDown", arm.dropArm());
 
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
-    () -> m_driverController.getLeftY(),
-    () -> m_driverController.getRightX()));
+    () -> switchSpeeds(m_driverController.getLeftY()),
+    () -> switchSpeeds(m_driverController.getRightX())));
 
     //only for testing
+     
     if (RobotBase.isSimulation()){
       driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
-      () -> m_driverController.getRawAxis(0),
-      () -> m_driverController.getRawAxis(1)));
+      () -> switchSpeeds(m_driverController.getRawAxis(0)),
+      () -> switchSpeeds(m_driverController.getRawAxis(1))));
     }
   }
-  
+
+
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -94,6 +101,15 @@ public class RobotContainer {
     */
 
     m_driverController.rightBumper().whileTrue(new resetEncoders(driveTrain));
+    m_driverController.x().onTrue(Commands.runOnce(() -> {
+      speedSlow = !speedSlow;
+    }, exam));
+
+    if (RobotBase.isSimulation()){
+      m_driverController.button(1).onTrue(Commands.runOnce(() -> {
+        speedSlow = !speedSlow;
+      }, exam));
+    }
 
     m_driverController2.a().toggleOnTrue(new movePneumaticArm(pneumatics));
     m_driverController2.pov(0).whileTrue(arm.raiseArm());
@@ -112,6 +128,14 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return Autos.autonomous(driveTrain, arm, pneumatics); //Autos.exampleAuto(m_exampleSubsystem);
+  }
+
+  public double switchSpeeds(double speed){
+    if(speedSlow){
+      return MathUtil.clamp(speed, -0.8, 0.8);
+    }
+
+    return speed;
   }
 
   /*
