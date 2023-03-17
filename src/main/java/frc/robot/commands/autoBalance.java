@@ -19,11 +19,11 @@ public class autoBalance extends ProfiledPIDCommand {
         // The ProfiledPIDController used by the command
         new ProfiledPIDController(
             // The PID gains
+            1.3,
             0,
-            0,
-            0,
+            0.05,
             // The motion profile constraints
-            new TrapezoidProfile.Constraints(0, 0)),
+            new TrapezoidProfile.Constraints(1, 1)),
         // This should return the measurement
         () -> drive.getPitch(),
         // This should return the goal (can also be a constant)
@@ -31,7 +31,7 @@ public class autoBalance extends ProfiledPIDCommand {
         // This uses the output
         (output, setpoint) -> {
           // Use the output (and setpoint, if desired) here
-          
+          drive.arcadeDrive(output, 0);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
@@ -40,6 +40,6 @@ public class autoBalance extends ProfiledPIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return getController().atGoal();
   }
 }

@@ -22,7 +22,7 @@ public class driveStraightPID extends PIDCommand {
   public driveStraightPID(DriveTrain drive, DoubleSupplier speed) {
     super(
         // The controller that the command will use
-        new PIDController(1.3, 0, 0),
+        new PIDController(1.3, 0, 0.05),
         // This should return the measurement
         () -> drive.getTurnRate(),
         // This should return the setpoint (can also be a constant)

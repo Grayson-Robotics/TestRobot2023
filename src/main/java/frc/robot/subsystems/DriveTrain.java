@@ -61,6 +61,7 @@ public class DriveTrain extends SubsystemBase {
     
     gyro.reset();
     
+
     leftEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
     rightEncoder.setDistancePerPulse(Constants.driveMotors.distancePerPulse);
 
@@ -97,7 +98,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getTurnRate(){
-    return gyro.getRate();
+    return -gyro.getRate();
   }
 
   public double getPitch(){

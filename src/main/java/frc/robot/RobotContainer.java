@@ -16,8 +16,10 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -36,6 +38,7 @@ public class RobotContainer {
   private final Arm arm = new Arm();
   private final ExampleSubsystem exam = new ExampleSubsystem();
   private boolean speedSlow = false;
+  private SendableChooser<Command> chooser = new SendableChooser<>();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -52,6 +55,11 @@ public class RobotContainer {
     Shuffleboard.getTab("Main Data").add("reset", new resetEncoders(driveTrain));
     Shuffleboard.getTab("Main Data").add("armUP", arm.raiseArm());
     Shuffleboard.getTab("Main Data").add("armDown", arm.dropArm());
+
+    chooser.setDefaultOption("normal auton", Autos.autonomous(driveTrain, arm, pneumatics));
+    chooser.addOption("traj test", Autos.ramseteCommand(driveTrain));
+    
+    Shuffleboard.getTab("Main Data").add(chooser);
 
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
     () -> switchSpeeds(m_driverController.getLeftY()),
@@ -127,7 +135,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.autonomous(driveTrain, arm, pneumatics); //Autos.exampleAuto(m_exampleSubsystem);
+    return chooser.getSelected(); //Autos.exampleAuto(m_exampleSubsystem);
   }
 
   public double switchSpeeds(double speed){

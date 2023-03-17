@@ -15,6 +15,7 @@ import frc.robot.subsystems.DriveTrain;
 public class PIDauto extends PIDCommand {
   DriveTrain driveTrain;
   
+  
   /** Creates a new PIDauto. */
   public PIDauto(DriveTrain drive) {
     super(
@@ -27,7 +28,7 @@ public class PIDauto extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          drive.arcadeDrive(MathUtil.clamp(-output,-0.5, 0.5), 0);
+          drive.arcadeDrive(MathUtil.clamp(output,-0.5, 0.5), 0);
         });
     this.driveTrain = drive;
     // Use addRequirements() here to declare subsystem dependencies.

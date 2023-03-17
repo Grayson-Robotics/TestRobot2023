@@ -37,12 +37,7 @@ public class AutoTest extends CommandBase {
   @Override
   public void execute() {
     if(time.get() > 0 && time.get() < 1){
-      arm.dropArmManual();
       pincher.setReverse();
-    }
-    if(time.get() > 2.5 && time.get() < 2.7){
-      arm.stopArm();
-      
     }
   }
 
@@ -55,6 +50,6 @@ public class AutoTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return time.get() > 2.8;
+    return time.get() > 1.2;
   }
 }
