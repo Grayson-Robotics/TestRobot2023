@@ -15,20 +15,28 @@ import frc.robot.subsystems.DriveTrain;
 public class PIDauto extends PIDCommand {
   DriveTrain driveTrain;
   
-  
   /** Creates a new PIDauto. */
-  public PIDauto(DriveTrain drive) {
+  public PIDauto(DriveTrain drive, String side) {
     super(
         // The controller that the command will use
         new PIDController(1.3, 0, 0.05),
         // This should return the measurement
         () -> drive.returnDistance(),
         // This should return the setpoint (can also be a constant)
-        () -> 4,
+        () -> 5,
         // This uses the output
         output -> {
           // Use the output here
-          drive.arcadeDrive(MathUtil.clamp(output,-0.5, 0.5), 0);
+          int sideSwap = 1;
+
+          if(side == "left"){
+            sideSwap = -1;
+          }
+          else if(side == "right"){
+            sideSwap = 1;
+          }
+          
+          drive.arcadeDrive(MathUtil.clamp(output,-0.5, 0.5), sideSwap * 0.3);
         });
     this.driveTrain = drive;
     // Use addRequirements() here to declare subsystem dependencies.

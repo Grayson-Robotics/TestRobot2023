@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,9 +23,13 @@ public class Arm extends SubsystemBase {
   private final MotorControllerGroup pullMotors = new MotorControllerGroup(leftPull, rightPull);
 
   private final double speed = 0.45;
-  private final double upSpeed = 0.65;
+  private final double upSpeed = 0.85;
   /** Creates a new Arm. */
   public Arm() {}
+
+  public void dynamicArmSpeeds(double speed){
+    pullMotors.set(MathUtil.clamp(speed, -0.5, 0.5));
+  }
 
   public CommandBase raiseArm(){
     return runEnd(
@@ -70,7 +75,7 @@ public class Arm extends SubsystemBase {
       );
   }
 
-  public void dropArmManual(){
+  public void dropArmManual(double speed){
     pullMotors.set(1 * speed);
   }
 

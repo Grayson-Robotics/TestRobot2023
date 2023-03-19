@@ -33,9 +33,14 @@ public final class Autos {
     return Commands.sequence(subsystem.exampleMethodCommand());
   }
   
-  public static CommandBase autonomous(DriveTrain drive, Arm arm, Pneumatics pneumatics){
-    return Commands.sequence(new resetEncoders(drive),new AutoTest(drive, arm, pneumatics), new PIDauto(drive));
+  public static CommandBase autonomous(DriveTrain drive, Arm arm, Pneumatics pneumatics, String side){
+    return Commands.sequence(new resetEncoders(drive),new AutoTest(drive, arm, pneumatics), new PIDauto(drive, side));
   }
+
+  public static CommandBase autonomous2electricboogaloo(DriveTrain drive, Arm arm, Pneumatics pneumatics){
+    return Commands.sequence(new resetEncoders(drive),new AutoTest(drive, arm, pneumatics), new PIDautoconversion(drive));
+  }
+
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }

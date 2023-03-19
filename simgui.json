@@ -23,6 +23,18 @@
       }
     }
   },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/Shuffleboard/Main Data/DifferentialDrive[1]": "DifferentialDrive",
+      "/Shuffleboard/Main Data/Field": "Field2d",
+      "/Shuffleboard/Main Data/Left Motors": "Motor Controller",
+      "/Shuffleboard/Main Data/Right Motors": "Motor Controller",
+      "/Shuffleboard/Main Data/navX-Sensor[1]": "Gyro",
+      "/Shuffleboard/choose command/SendableChooser[0]": "String Chooser",
+      "/Shuffleboard/choose command/SendableChooser[1]": "String Chooser"
+    }
+  },
   "NetworkTables Info": {
     "visible": true
   }

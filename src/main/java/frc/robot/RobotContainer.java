@@ -11,13 +11,16 @@ import frc.robot.commands.PIDauto;
 import frc.robot.commands.driveStraightPID;
 import frc.robot.commands.movePneumaticArm;
 import frc.robot.commands.resetEncoders;
+import frc.robot.commands.stickArmControl;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -39,6 +42,9 @@ public class RobotContainer {
   private final ExampleSubsystem exam = new ExampleSubsystem();
   private boolean speedSlow = false;
   private SendableChooser<Command> chooser = new SendableChooser<>();
+  private SendableChooser<String> chooseSide = new SendableChooser<>();
+  
+  private HttpCamera limelightFeed = new HttpCamera("limelight", "http://10.81.0.11:5800/stream.mjpg");
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -52,18 +58,29 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     
+    /*
     Shuffleboard.getTab("Main Data").add("reset", new resetEncoders(driveTrain));
     Shuffleboard.getTab("Main Data").add("armUP", arm.raiseArm());
     Shuffleboard.getTab("Main Data").add("armDown", arm.dropArm());
+    */
 
-    chooser.setDefaultOption("normal auton", Autos.autonomous(driveTrain, arm, pneumatics));
+    chooseSide.setDefaultOption("drift right", "left");
+    chooseSide.addOption("drift left", "right");
+
+
+    chooser.setDefaultOption("normal auton", Autos.autonomous(driveTrain, arm, pneumatics, chooseSide.getSelected()));
     chooser.addOption("traj test", Autos.ramseteCommand(driveTrain));
+    chooser.addOption("auto 2 (untested)", Autos.autonomous2electricboogaloo(driveTrain, arm, pneumatics));
     
-    Shuffleboard.getTab("Main Data").add(chooser);
+    Shuffleboard.getTab("choose command").add(chooser);
+    Shuffleboard.getTab("choose command").add(chooseSide);
+    Shuffleboard.getTab("camera").add(limelightFeed).withWidget(BuiltInWidgets.kCameraStream).withPosition(1, 1).withSize(5, 4);
 
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
     () -> switchSpeeds(m_driverController.getLeftY()),
     () -> switchSpeeds(m_driverController.getRightX())));
+
+
 
     //only for testing
      
@@ -146,6 +163,10 @@ public class RobotContainer {
     return speed;
   }
 
+  public void setArmDefaultCommand(){
+    arm.setDefaultCommand(new stickArmControl(arm, 
+    () -> m_driverController2.getLeftY()));
+  }
   /*
   public CommandXboxController whichDrivesY(CommandXboxController controller1, CommandXboxController controller2){
     CommandXboxController controller = controller1;
