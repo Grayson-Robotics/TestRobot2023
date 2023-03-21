@@ -20,6 +20,9 @@ import frc.robot.subsystems.Pneumatics;
 
 import java.util.HashMap;
 
+import com.pathplanner.lib.PathConstraints;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.RamseteAutoBuilder;
 
@@ -53,6 +56,7 @@ public class RobotContainer {
   private boolean speedSlow = false;
   private SendableChooser<Command> chooser = new SendableChooser<>();
   private SendableChooser<String> chooseSide = new SendableChooser<>();
+  private PathPlannerTrajectory experiment = PathPlanner.loadPath("experimentation", new PathConstraints(4, 3));
   private RamseteAutoBuilder autoBuilder;
   
   private HttpCamera limelightFeed = new HttpCamera("limelight", "http://10.81.0.11:5800/stream.mjpg");
@@ -107,6 +111,7 @@ public class RobotContainer {
       true,
       driveTrain);
 
+    chooser.addOption("pathplanner traj", autoBuilder.fullAuto(experiment));
     //only for testing
      
     if (RobotBase.isSimulation()){
