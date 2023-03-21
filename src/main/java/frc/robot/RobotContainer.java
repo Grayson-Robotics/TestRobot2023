@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.voltConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.PIDauto;
@@ -16,8 +17,16 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
+
+import java.util.HashMap;
+
+import com.pathplanner.lib.auto.PIDConstants;
+import com.pathplanner.lib.auto.RamseteAutoBuilder;
+
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -25,6 +34,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -43,6 +53,7 @@ public class RobotContainer {
   private boolean speedSlow = false;
   private SendableChooser<Command> chooser = new SendableChooser<>();
   private SendableChooser<String> chooseSide = new SendableChooser<>();
+  private RamseteAutoBuilder autoBuilder;
   
   private HttpCamera limelightFeed = new HttpCamera("limelight", "http://10.81.0.11:5800/stream.mjpg");
 
@@ -79,8 +90,22 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
     () -> switchSpeeds(m_driverController.getLeftY()),
     () -> switchSpeeds(m_driverController.getRightX())));
-
-
+    
+    HashMap<String, Command> eventMap = new HashMap<>();
+    eventMap.put("marker1", new PrintCommand("hell yeah it works."));
+    
+    autoBuilder = new RamseteAutoBuilder(
+      driveTrain::getPose,
+      driveTrain::resetOdometry, 
+      new RamseteController(voltConstants.kRamseteB, voltConstants.kRamseteZeta),
+      voltConstants.kDriveKinematics,
+      new SimpleMotorFeedforward(voltConstants.ksVolts, voltConstants.kvVolts,voltConstants.kaVolts),
+      driveTrain::getSpeeds,
+      new PIDConstants(8.6563, 0, 0),
+      driveTrain::tankDriveVolts,
+      eventMap,
+      true,
+      driveTrain);
 
     //only for testing
      
