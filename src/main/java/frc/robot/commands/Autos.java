@@ -41,6 +41,13 @@ public final class Autos {
     return Commands.sequence(new resetEncoders(drive),new AutoTest(drive, arm, pneumatics), new PIDautoconversion(drive));
   }
 
+  public static CommandBase autoBalance(DriveTrain drive, Arm arm, Pneumatics pneumatics){
+    return Commands.sequence(new resetEncoders(drive),new AutoTest(drive, arm, pneumatics), new driveUntilPitchedUp(drive), new autoBalance(drive));
+  }
+
+  public static CommandBase autoBalanceOnly(DriveTrain drive){
+    return new autoBalance(drive);
+  }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }

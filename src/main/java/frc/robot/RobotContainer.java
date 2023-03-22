@@ -71,6 +71,8 @@ public class RobotContainer {
     chooser.setDefaultOption("normal auton", Autos.autonomous(driveTrain, arm, pneumatics, chooseSide.getSelected()));
     chooser.addOption("traj test", Autos.ramseteCommand(driveTrain));
     chooser.addOption("auto 2 (untested)", Autos.autonomous2electricboogaloo(driveTrain, arm, pneumatics));
+    chooser.addOption("autoBalance", Autos.autoBalance(driveTrain, arm, pneumatics));
+    chooser.addOption("autoBalanceOnly", Autos.autoBalanceOnly(driveTrain));
     
     Shuffleboard.getTab("choose command").add(chooser);
     Shuffleboard.getTab("choose command").add(chooseSide);

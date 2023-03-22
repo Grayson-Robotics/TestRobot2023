@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -27,7 +28,7 @@ public class driveUntilPitchedUp extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          drive.arcadeDrive(output, 0);
+          drive.arcadeDrive(MathUtil.clamp(output, -0.5, 0.5), 0);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.

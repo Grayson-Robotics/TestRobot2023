@@ -31,6 +31,7 @@ public class AutoTest extends CommandBase {
   public void initialize() {
     time = new Timer(); //creates a new timer object and then starts it
     time.start();
+    pincher.setForward();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
