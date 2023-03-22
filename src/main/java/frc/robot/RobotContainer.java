@@ -92,8 +92,8 @@ public class RobotContainer {
     Shuffleboard.getTab("camera").add(limelightFeed).withWidget(BuiltInWidgets.kCameraStream).withPosition(1, 1).withSize(5, 4);
 
     driveTrain.setDefaultCommand(new DriveCommand(driveTrain,
-    () -> switchSpeeds(m_driverController.getLeftY()),
-    () -> switchSpeeds(m_driverController.getRightX())));
+    () -> switchSpeeds(-m_driverController.getLeftY()),
+    () -> switchSpeeds(-m_driverController.getRightX())));
     
     HashMap<String, Command> eventMap = new HashMap<>();
     eventMap.put("marker1", new PrintCommand("hell yeah it works."));

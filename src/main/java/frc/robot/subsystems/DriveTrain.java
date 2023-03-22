@@ -56,8 +56,8 @@ public class DriveTrain extends SubsystemBase {
   
   /** Creates a new DriveTrain. */
   public DriveTrain() {
-    topRightMotor.setInverted(true);
-    leftmotors.setInverted(true);
+    topLeftMotor.setInverted(true);
+    rightmotors.setInverted(true);
     
     gyro.reset();
     
